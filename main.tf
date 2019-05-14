@@ -73,7 +73,7 @@ resource "google_compute_address" "vault" {
 # Private GKE Cluster
 ##########################################################
 module "k8s" {
-  source                    = "github.com/dansible/terraform-google_gke_infra"
+  source                    = "github.com/dansible/terraform-google-gke-infra"
   name                      = "${var.name}"
   project                   = "${var.project}"
   region                    = "${var.region}"
