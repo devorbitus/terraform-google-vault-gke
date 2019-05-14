@@ -1,9 +1,9 @@
 # Required
-variable kms_keyring_name {
+variable "kms_keyring_name" {
   description = "The name of the Cloud KMS KeyRing for asset encryption."
 }
 
-variable kms_key_name {
+variable "kms_key_name" {
   description = "The name of the Cloud KMS Key used for asset encryption/decryption."
 }
 
@@ -23,17 +23,17 @@ variable "name" {
   default     = "vault"
 }
 
-variable kms_location {
+variable "kms_location" {
   description = "The location of your KMS keyring and key."
   default     = "global"
 }
 
-variable vault_ip_network_tier {
+variable "vault_ip_network_tier" {
   description = "The networking tier used for configuring this address. This field can take the following values: PREMIUM or STANDARD."
   default     = "STANDARD"
 }
 
-variable cluster_machine_type {
+variable "cluster_machine_type" {
   description = "The name of a Google Compute Engine machine type. Defaults to n1-standard-2."
   default     = "n1-standard-2"
 }
@@ -51,24 +51,24 @@ variable "vault_init_image" {
 variable "num_vault_pods" {
   description = "The number of Vault pods to deploy in a StatefulSet."
   default     = "3"
-  type        = "string"
+  type        = string
 }
 
 variable "vault_recovery_keys" {
   description = "Number of recovery keys to generate."
   default     = "5"
-  type        = "string"
+  type        = string
 }
 
 variable "vault_recovery_key_threshold" {
   description = "Number of recovery keys required for quorum. This must be less than or equal to vault_recovery_keys."
   default     = "3"
-  type        = "string"
+  type        = string
 }
 
 variable "service_account_iam_roles" {
   description = "The roles to apply to the Vault GCP Service Account."
-  type        = "list"
+  type        = list(string)
 
   default = [
     "roles/resourcemanager.projectIamAdmin",
@@ -84,9 +84,9 @@ variable "service_account_iam_roles" {
   ]
 }
 
-variable gke_oauth_scopes {
+variable "gke_oauth_scopes" {
   description = "The set of Google API scopes to enable on the GKE nodes."
-  type        = "list"
+  type        = list(string)
 
   default = [
     "https://www.googleapis.com/auth/monitoring",
@@ -99,7 +99,7 @@ variable gke_oauth_scopes {
 
 variable "storage_bucket_roles" {
   description = "The roles given to the Vault GCP Service Account for accessing the GCS Bucket resources."
-  type        = "list"
+  type        = list(string)
 
   default = [
     "roles/storage.legacyBucketReader",
@@ -109,7 +109,7 @@ variable "storage_bucket_roles" {
 
 variable "kms_crypto_key_roles" {
   description = "The roles given to the Vault GCP Service Account for interacting with Google KMS."
-  type        = "list"
+  type        = list(string)
 
   default = [
     "roles/cloudkms.cryptoKeyEncrypterDecrypter",
@@ -125,3 +125,4 @@ variable "enable_network_policy" {
   description = "Whether we should enable the network policy addon for the master. This must be enabled in order to enable network policy for the nodes. It can only be disabled if the nodes already do not have network policies enabled."
   default     = false
 }
+
